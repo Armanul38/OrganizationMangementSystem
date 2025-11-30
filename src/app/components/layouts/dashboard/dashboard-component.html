@@ -1,0 +1,28 @@
+<div class="flex h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 font-sans overflow-hidden">
+  
+  <div 
+    class="fixed inset-y-0 left-0 z-30 transform bg-white transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 shadow-lg lg:shadow-none"
+    [class.-translate-x-full]="!isSidebarOpen()"
+    [class.translate-x-0]="isSidebarOpen()"
+  >
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+    
+    <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+
+    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900 p-6">
+      <router-outlet></router-outlet>
+    </main>
+
+    <app-footer></app-footer>
+  </div>
+
+  @if (isSidebarOpen()) {
+    <div 
+      (click)="toggleSidebar()" 
+      class="fixed inset-0 z-20 bg-black opacity-50 lg:hidden"
+    ></div>
+  }
+</div>
